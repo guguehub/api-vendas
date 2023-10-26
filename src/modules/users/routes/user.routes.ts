@@ -12,10 +12,22 @@ usersRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-
       email: Joi.string().email().required(),
       password: Joi.string().required(),
     },
   }),
   usersController.create,
 );
+// delete
+
+usersRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  usersController.delete,
+);
+
+export default usersRouter;
