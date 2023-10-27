@@ -16,7 +16,7 @@ class CreateUserService {
     const emailExists = await usersRepository.findByEmail(email);
 
     if (emailExists) {
-      throw new AppError('Email aready taken');
+      throw new AppError('Email already taken');
     }
 
     const hashedPassword = await hash(password, 8);
