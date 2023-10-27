@@ -7,6 +7,8 @@ export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const ListUser = new ListUserService();
 
+    console.log(request.user.id);
+
     const users = await ListUser.execute();
 
     return response.json(users);
