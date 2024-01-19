@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { JwtPayload, verify } from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
 import AppError from '@shared/errors/AppError';
 import authConfig from '@config/auth';
 
@@ -19,7 +19,7 @@ export default function isAuthenticated(
   if (!authHeader) {
     throw new AppError('jwt token is missing');
   }
-  //bearer  sdfsdf
+  //bearer  + token
   const [, token] = authHeader.split(' ');
 
   try {
