@@ -18,7 +18,7 @@ class ResetPasswordService {
     const userToken = await userTokensRepository.findByToken(token);
 
     if (!userToken) {
-      throw new Error('user TOKEN does not exist');
+      throw new AppError('user TOKEN does not exist');
     }
 
     const user = await usersRepository.findById(userToken.user_id);
@@ -37,6 +37,8 @@ class ResetPasswordService {
 
     // using bcrypt to encrypt password
     user.password = await hash(password, 8);
+
+    await usersRepository.save(user);
   }
 }
 
