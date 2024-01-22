@@ -30,7 +30,7 @@ class UpdateProfileService {
 
     const userUpdateEmail = await usersRepository.findByEmail(email);
 
-    if(userUpdateEmail && userUpdateEmail.id != user_id ) {
+    if (userUpdateEmail && userUpdateEmail.id != user_id) {
       throw new AppError('there is already one user with this email.');
     }
 
@@ -45,7 +45,7 @@ class UpdateProfileService {
         throw new AppError('Old password does not match');
       }
 
-      user.password = await hash(password.8);
+      user.password = await hash(password, 8);
     }
 
     user.name = name;
