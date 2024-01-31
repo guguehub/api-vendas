@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 import CustomersController from '../controllers/CustomersController';
+import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 
 const customersRouter = Router();
 const customersController = new CustomersController();
+
+//all routes must have authentication
+customersRouter.use(isAuthenticated);
 
 customersRouter.get('/', customersController.index);
 
@@ -16,7 +20,6 @@ customersRouter.get(
   }),
   customersController.show,
 );
-
 customersRouter.post(
   '/',
   celebrate({

@@ -9,7 +9,7 @@ export default class CustomersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listCustomers = new ListCustomerService();
 
-    const customers = listCustomers.execute();
+    const customers = await listCustomers.execute();
 
     return response.json(customers);
   }
