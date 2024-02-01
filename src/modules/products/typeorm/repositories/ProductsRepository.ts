@@ -3,7 +3,7 @@ import { EntityRepository, FindManyOptions, Repository } from 'typeorm';
 import Product from '../entities/Product';
 
 @EntityRepository(Product)
-export class ProductRepository extends Repository<Product> {
+class ProductRepository extends Repository<Product> {
   public async findByName(name: string): Promise<Product | undefined> {
     const product = this.findOne({
       where: {
@@ -13,3 +13,4 @@ export class ProductRepository extends Repository<Product> {
     return product;
   }
 }
+export default ProductRepository;
