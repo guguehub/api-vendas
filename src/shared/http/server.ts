@@ -30,7 +30,7 @@ app.use(
     }
     return response.status(500).json({
       status: 'error',
-      message: 'internal server error',
+      message: console.log(error),
     });
   },
 );

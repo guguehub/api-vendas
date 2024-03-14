@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import DeleteUserService from '../services/DeleteUserService';
+//import DeleteUserService from '../services/DeleteUserService';
 import ShowProfileService from '../services/ShowProfileService';
 import UpdateProfileService from '../services/UpdateProfileService';
 
 export default class ProfileController {
   public async show(request: Request, response: Response): Promise<Response> {
     const showProfile = new ShowProfileService();
-    const user_id = await request.user.id;
+    const user_id = request.user.id;
 
     //console.log(request.user.id);
 
