@@ -9,9 +9,15 @@ class ListProductService {
 
     const redisCache = new RedisCache();
 
-    const products = await productsRepository.find();
+    let products = await redisCache.recover<Product[]>(
+      'api-vendas-PRODUCT-LIST',
+    );
 
-    await redisCache.save('teste', 'teste');
+    if (!products) {
+      products = await productsRepository.find();
+
+      await redisCache.save('api-vendas-PRODUCT-LIST', products);
+    }
 
     return products;
   }

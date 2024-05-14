@@ -1,5 +1,6 @@
 import Redis, { Redis as RedisClient } from 'ioredis';
 import cacheConfig from '@config/cache';
+import { classToPlainFromExist } from 'class-transformer';
 
 export default class RedisCache {
   private client: RedisClient;
@@ -12,7 +13,18 @@ export default class RedisCache {
     await this.client.set(key, JSON.stringify(value));
   }
 
-  //public async recover<T>(key: string): Promise<T | null> {};
+  public async recover<T>(key: string): Promise<T | null> {
+    const data = await this.client.get(key);
 
-  //public async invalidate(key: string): Promise<void>{}
+    if (!data) {
+      return null;
+    }
+
+    const parseData = JSON.parse(data) as T;
+    return parseData;
+  }
+
+  public async invalidate(key: string): Promise<void> {
+    await this.client.del(key);
+  }
 }
